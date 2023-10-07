@@ -28,14 +28,32 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config user.name github-cr-bot
-          git config user.email "github-cr-bot@users.noreply.github.com"
+          git config user.name github-chart-bot
+          git config user.email "github-chart-bot@users.noreply.github.com"
 
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@ed43eb303604cbc0eeec8390544f7748dc6c790d
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          charts_dir: helm-chart
-          skip_existing: true
-          packages_with_index: true
-        env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Add chart
+        run: |
+          shopt -s nullglob
+          filename=(bchr-test-*.tgz)
+          if [ -z "$filename" ]; then
+            echo "No chart found"
+            exit 1
+          fi
+          if [ -f "gh-pages/$filename" ]; then
+            echo "Chart $filename already exists"
+            exit 1
+          fi
+          mv "../$filename" gh-pages
+
+      - name: Push chart
+        run: |
+          helm repo index .
+          git add --all
+          git commit -m "Update chart"
+          git push origin gh-pages
