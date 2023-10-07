@@ -26,6 +26,11 @@ jobs:
         with:
           version: v3.12.0
 
+      - name: Configure Git
+        run: |
+          git config user.name github-cr-bot
+          git config user.email "github-cr-bot@users.noreply.github.com"
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@ed43eb303604cbc0eeec8390544f7748dc6c790d
         with:
