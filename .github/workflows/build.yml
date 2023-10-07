@@ -39,6 +39,10 @@ jobs:
 
       - name: Add chart
         run: |
+          helm package helm-chart
+
+      - name: Add chart
+        run: |
           shopt -s nullglob
           filename=(bchr-test-*.tgz)
           if [ -z "$filename" ]; then
