@@ -18,8 +18,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Install Helm
         uses: azure/setup-helm@v3
@@ -49,17 +47,17 @@ jobs:
             exit 1
           fi
           mv "$filename" gh-pages/
+          helm repo index gh-pages/
 
-      - name: Configure Git
+      - name: Index chart Git
         run: |
           git config user.name github-chart-bot
           git config user.email "github-chart-bot@users.noreply.github.com"
+          git add --all
+          git commit -m "Update chart"
         working-directory: gh-pages
 
       - name: Push chart
         run: |
-          helm repo index .
-          git add --all
-          git commit -m "Update chart"
           git push origin gh-pages
         working-directory: gh-pages
