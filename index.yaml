@@ -3,7 +3,17 @@ entries:
   bchr-test:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-10-07T18:15:20.123244151Z"
+    created: "2023-10-07T19:02:53.25961015Z"
+    description: BCHR test
+    digest: 0178f3f1c08cf7440aef383a3f710d1442ebd97f56e08b34a92f30e138ca08e5
+    name: bchr-test
+    type: application
+    urls:
+    - bchr-test-0.0.6.tgz
+    version: 0.0.6
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2023-10-07T19:02:53.259471849Z"
     description: BCHR test
     digest: c91d9f89e8496d86a6f1307c9b8669b6a8bb5a5a1328e79134e7fb9cc961b82c
     name: bchr-test
@@ -11,4 +21,4 @@ entries:
     urls:
     - bchr-test-0.0.5.tgz
     version: 0.0.5
-generated: "2023-10-07T18:15:20.123349755Z"
+generated: "2023-10-07T19:02:53.259201348Z"
