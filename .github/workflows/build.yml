@@ -26,11 +26,6 @@ jobs:
         with:
           version: v3.12.0
 
-      - name: Configure Git
-        run: |
-          git config user.name github-chart-bot
-          git config user.email "github-chart-bot@users.noreply.github.com"
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -54,6 +49,12 @@ jobs:
             exit 1
           fi
           mv "$filename" gh-pages/
+
+      - name: Configure Git
+        run: |
+          git config user.name github-chart-bot
+          git config user.email "github-chart-bot@users.noreply.github.com"
+        working-directory: gh-pages
 
       - name: Push chart
         run: |
