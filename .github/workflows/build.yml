@@ -37,7 +37,7 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
-      - name: Add chart
+      - name: Build chart
         run: |
           helm package helm-chart
 
@@ -53,7 +53,7 @@ jobs:
             echo "Chart $filename already exists"
             exit 1
           fi
-          mv "../$filename" gh-pages
+          mv "$filename" gh-pages/
 
       - name: Push chart
         run: |
@@ -61,3 +61,4 @@ jobs:
           git add --all
           git commit -m "Update chart"
           git push origin gh-pages
+        working-directory: gh-pages
